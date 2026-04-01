@@ -1,4 +1,4 @@
-package com.example.daodesignpattern.dao;
+package com.example.daodesignpattern.dao.impl;
 
 
 import dao.impl.AuthorDaoImpl;
@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.jdbc.core.JdbcTemplate;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
 
@@ -40,5 +41,19 @@ public class AuthorDaoImplTest {
                 ArgumentMatchers.eq(1L),ArgumentMatchers.eq("Abigail Rose"),ArgumentMatchers.eq(80)
         );
 
+    }
+
+    @Test
+    public void testThatFindOneGeneratesTheCorrectSQL(){
+       test.findOne(1L);
+       verify(jdbcTemplate).query(
+               ArgumentMatchers.eq(
+                       "SELECT * FROM authors WHERE id = ?"),
+               ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any(),
+               eq(1L)
+
+
+       );
+       System.out.println("Probando metodo encontrar Autor");
     }
 }
