@@ -1,4 +1,4 @@
-package com.example.daodesignpattern.dao;
+package com.example.daodesignpattern.dao.impl;
 
 
 import dao.impl.BookDaoImpl;
